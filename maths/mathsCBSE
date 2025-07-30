@@ -1,1 +1,97 @@
-KHLJL
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{multicol}
+\geometry{margin=1in}
+\usepackage{setspace}
+\usepackage{titling}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{minipage}{0.45\textwidth}
+  \includegraphics[width=\linewidth]{Logo.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+  \raggedleft
+  \textbf{Name: Surabhi P}\\
+  \textbf{Id: COMETFWC032}\\
+  \textbf{Date: 30 July 2025}
+\end{minipage}
+
+\vspace{1cm}
+
+\begin{center}
+  {\LARGE \textbf{CBSE Maths Questions 2015}}\\
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+\section*{SECTION A}
+\begin{enumerate}
+  \item If the quadratic equation \( px^2 - 2\sqrt{5}px + 15 = 0 \) has two equa>
+
+  \item In Figure 1.2, a tower AB is 20 m high and BC, its shadow on the ground,>
+  \begin{center}
+    \includegraphics[width=0.5\textwidth]{Figure1_2.png}
+    \captionof{figure}{Figure 1.2}
+  \end{center}
+
+  \item Two different dice are tossed together. Find the probability that the pr>
+
+  \item In Figure, PQ is a chord of a circle with centre O and PT is a tangent. >
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{Figure1_4.png}
+    \captionof{figure}{Figure 1.4}
+  \end{center}
+
+  \item In Figure 1.5, two tangents RQ and RP are drawn from an external point R>
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{Figure1_5.png}
+    \captionof{figure}{Figure 1.5}
+  \end{center}
+\end{enumerate}
+
+\section*{SECTION B}
+
+\begin{enumerate}
+  \item In Figure 2.1, a triangle ABC is drawn to circumscribe a circle of radiu>
+
+  \begin{center}
+    \includegraphics[width=0.85\columnwidth]{Figure2_1.png}
+    \captionof{figure}{Figure 2.1}
+  \end{center}
+  \item Solve the quadratic equation for \( x \): \( 4x^2 + 4bx - (a^2 - b^2) = >
+
+  \item In an AP, if \( S5 + S7 = 167 \) and \( S{10} = 235 \), then find the AP>
+
+  \item The points \( A = (4, 7) \), \( B = (p, 3) \), and \( C = (7, 3) \) are >
+
+  \item Find the relation between \( x \) and \( y \) if the points \( A = (x, y>
+\end{enumerate}
+
+\section*{SECTION C}
+
+\begin{enumerate}
+  \item The 14th term of an AP is twice its 8th term. If its 6th term is -8, the>
+\end{enumerate}
+\end{multicols}
+\end{document}\item Solve the quadratic equation for \( x \): \( 4x^2 + 4bx - (a^2 - b^2) = >
+
+  \item In an AP, if \( S5 + S7 = 167 \) and \( S{10} = 235 \), then find the AP>
+
+  \item The points \( A = (4, 7) \), \( B = (p, 3) \), and \( C = (7, 3) \) are >
+
+  \item Find the relation between \( x \) and \( y \) if the points \( A = (x, y>
+\end{enumerate}
+
+\section*{SECTION C}
+
+\begin{enumerate}
+  \item The 14th term of an AP is twice its 8th term. If its 6th term is -8, the>
+\end{enumerate}
+\end{multicols}
+\end{document}
