@@ -60,7 +60,7 @@ which is the XOR operation, i.e., $A = U \oplus V$
 \vspace{0.5 cm}
 Inputs to the second (right) MUX:
 \[
-I_0 = A\overline{W}, \quad I_1 = 0, \quad I_2 = 0, \quad I_3 = AW
+I_0 = A\overline{W}, \quad I_1 = A\overline{w}, \quad I_2 = 0, \quad I_3 = 0
 \]
 
 Select lines: $S_1 = W, \quad S_0 = X$\\
@@ -73,28 +73,28 @@ So the output $ F $ of the second MUX is:
 W & X & \text{Selection} & F \\
 \hline
 0 & 0 & I_0 = A\overline{W} & A\overline{W} \\
-0 & 1 & I_1 = 0 & 0 \\
+0 & 1 & I_1 = A\overline{W} & A\overline{W} \\
 1 & 0 & I_2 = 0 & 0 \\
-1 & 1 & I_3 = AW & AW \\
+1 & 1 & I_3 = 0 & 0 \\
 \hline
 
 \end{array}
 \]
 
-So, $F = A\overline{W}\overline{X} + AWX$
+So, $F = A\overline{W} + A\overline{W}$
 
 Now substitute $A = U\overline{V} + \overline{U}V$
 \[
-F = (U\overline{V} + \overline{U}V)(\overline{W} \overline{X} + WX)
+F = (U\overline{V} + \overline{U}V)(\overline{W})
 \]
 
 Final Answer
 
 \[
-\boxed{F(U, V, W, X) = (U\overline{V} + \overline{U}V)(\overline{W} \overline{X}+ WX)}
+\boxed{F(U, V, W, X) = (U\overline{V} + \overline{U}V)(\overline{W})}
 \]
 
 \vspace{0.5 cm}
-This corresponds to \textbf{Option (D)}.
+This corresponds to \textbf{Option (C)}.
 
 \end{document}
