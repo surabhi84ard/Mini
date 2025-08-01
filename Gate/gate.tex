@@ -1,0 +1,100 @@
+\documentclass[12pt]{article} \usepackage{amsmath, amssymb}\usepackage{geometry,graphicx}
+\geometry{margin=1in}
+
+\begin{document}
+
+\begin{minipage}{0.45\textwidth}
+  \includegraphics[width=\linewidth]{Logo.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+  \raggedleft
+  \textbf{Name: Surabhi P}\\
+  \textbf{Id: COMETFWC032}\\
+  \textbf{Date: 1 August 2025}
+\end{minipage}
+
+\begin{center}
+  {\LARGE \textbf{Solution to GATE EC 2018 - Question 31}}\\
+\end{center}
+
+\textbf{Solution:}\\
+
+A four-variable Boolean function is realized using two 4×1 multiplexers.\\
+
+Determining the minimized boolean expression for the output function $ F(U, V, W, X)$:-
+
+\vspace{0.5cm}
+
+\underline{Considering the first MUX}
+
+\vspace{0.5cm}
+Inputs to the first (left) MUX:
+\[
+I_0 = 0, \quad I_1 = 1, \quad I_2 = 1, \quad I_3 = 0
+\]
+
+Select lines: $S_1 = U, \quad S_0 = V$\\
+
+So the output $A$ of the first MUX is determined by:
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+U & V & \text{Selection} & A \\
+\hline
+0 & 0 & I_0 = 0 & 0 \\
+0 & 1 & I_1 = 1 & 1 \\
+1 & 0 & I_2 = 1 & 1 \\
+1 & 1 & I_3 = 0 & 0 \\
+\hline
+\end{array}
+\]
+
+From the truth table, we identify: $A = U\overline{V} + \overline{U}V$\\
+
+which is the XOR operation, i.e., $A = U \oplus V$
+
+\vspace{0.5 cm}
+\underline{Considering the second MUX}
+
+\vspace{0.5 cm}
+Inputs to the second (right) MUX:
+\[
+I_0 = A\overline{W}, \quad I_1 = 0, \quad I_2 = 0, \quad I_3 = AW
+\]
+
+Select lines: $S_1 = W, \quad S_0 = X$\\
+
+So the output $ F $ of the second MUX is:
+
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+W & X & \text{Selection} & F \\
+\hline
+0 & 0 & I_0 = A\overline{W} & A\overline{W} \\
+0 & 1 & I_1 = 0 & 0 \\
+1 & 0 & I_2 = 0 & 0 \\
+1 & 1 & I_3 = AW & AW \\
+\hline
+
+\end{array}
+\]
+
+So, $F = A\overline{W}\overline{X} + AWX$
+
+Now substitute $A = U\overline{V} + \overline{U}V$
+\[
+F = (U\overline{V} + \overline{U}V)(\overline{W} \overline{X} + WX)
+\]
+
+Final Answer
+
+\[
+\boxed{F(U, V, W, X) = (U\overline{V} + \overline{U}V)(\overline{W} \overline{X}+ WX)}
+\]
+
+\vspace{0.5 cm}
+This corresponds to \textbf{Option (D)}.
+
+\end{document}
