@@ -1,4 +1,7 @@
-// Q4:  Write a function that can take two integers as input, and gives 5 outputs : addition, subtraction, multiplication, quotient and reminder of those two numbers. Print the outputs in the main function.
+/* 
+   Q4:  Write a function that can take two integers as input, and gives 5 outputs : addition, subtraction, 
+   multiplication, quotient and reminder of those two numbers. Print the outputs in the main function. 
+*/
 
 #include <stdio.h>
 
