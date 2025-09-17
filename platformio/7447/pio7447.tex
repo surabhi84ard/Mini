@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx,geometry}
+\usepackage{array,url}
+\usepackage[breaklinks]{hyperref}
+\geometry{margin=1in}
+\usepackage{setspace}
+\usepackage{titling}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{minipage}{0.45\textwidth}
+  \includegraphics[width=\linewidth]{Logo.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+  \raggedleft
+  \textbf{Name: Surabhi P}\\
+  \textbf{Id: COMETFWC032}\\
+  \textbf{Date: 28 August 2025}
+\end{minipage}
+
+\vspace{1cm}
+
+\begin{center}
+\fbox{
+     \parbox{0.9\textwidth}{
+       \centering
+       \small
+
+       \url{https://github.com/surabhi84ard/Mini/tree/8e9042b13304f4b4923d330711d1eb424065bccb/platformio}
+     }
+}
+\end{center}
+\section*{Abstract}
+This manual shows how to use the 7447 BCD–Seven Segment Display decoder to learn Boolean logic.
+
+\section{Components}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Component} & \textbf{Value} & \textbf{Quantity} \\
+\hline
+Resistor & 220 Ohm & 1 \\
+Arduino & UNO & 1 \\
+Seven Segment Display & -- & 1 \\
+Decoder & 7447 & 1 \\
+Jumper Wires & M-M & 20 \\
+Breadboard & -- & 1 \\
+\hline
+\end{tabular}
+\caption{Required Components}
+\end{table}
+
+\section{Hardware Setup}
+
+\subsection{7447 to Display Connections}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{7447 Output} & \textbf{Display Segment} \\
+\hline
+\texttt{b, c, d, e, f, g} & \texttt{a, b, c, d, e, f, g} \\
+\hline
+\end{tabular}
+\caption{Decoder to Display Mapping}
+\end{table}
+
+\subsection{BCD Input to Decimal Output}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{BCD Input} & \textbf{Binary} & \textbf{Decimal Output} \\
+\hline
+0000 & 0 & 0 \\
+0001 & 1 & 1 \\
+\hline
+\end{tabular}
+\caption{Initial Truth Table}
+\end{table}
+
+\section{Software Implementation}
+
+\subsection{Arduino Pin Mapping}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{7447 Input} & \textbf{Arduino Pin} \\
+\hline
+D & 5 \\
+C & 4 \\
+B & 3 \\
+A & 2 \\
+\hline
+\end{tabular}
+\caption{Arduino to 7447 Connections}
+\end{table}
+
+\subsection{Boolean Logic}
+The logic for output D is given by:
+
+
+\[
+D = WXYZ + WXYZ'
+\]
+
+
+
+Where:
+- \( WXYZ' \) corresponds to input 0111
+- \( W'X'Y'Z \) corresponds to input 1000
+
+\subsection{Truth Table for Increment Logic}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+Z & Y & X & W & D & C & B & A & Decimal \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 2 \\
+0 & 0 & 1 & 0 & 0 & 0 & 1 & 1 & 3 \\
+0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 4 \\
+0 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 5 \\
+0 & 1 & 0 & 1 & 0 & 1 & 1 & 0 & 6 \\
+0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 & 7 \\
+0 & 1 & 1 & 1 & 1 & 0 & 1 & 0 & 8 \\
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+\end{tabular}
+\caption{Incremented Output Truth Table}
+\end{table}
+
+\section*{Note}
+All content in this manual is released under GNU GPL. Free and open source.
+
+\end{document}
