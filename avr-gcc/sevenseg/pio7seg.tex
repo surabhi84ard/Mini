@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx,geometry}
+\usepackage{array,url}
+\usepackage[breaklinks]{hyperref}
+\geometry{margin=1in}
+\usepackage{setspace}
+\usepackage{titling}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{minipage}{0.45\textwidth}
+  \includegraphics[width=\linewidth]{Logo.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+  \raggedleft
+  \textbf{Name: Surabhi P}\\
+  \textbf{Id: COMETFWC032}\\
+  \textbf{Date: 17 Sept 2025}
+\end{minipage}
+
+\vspace{1cm}
+
+\begin{center}
+\fbox{
+     \parbox{0.9\textwidth}{
+       \centering
+       \small
+
+       \url{https://github.com/surabhi84ard/Mini/tree/8e9042b13304f4b4923d330711d1eb424065bccb/avr-gcc}
+     }
+}
+\end{center}
+\section*{Abstract}
+The objective of this manual is to show how to control a seven segment display through the Arduino IDE.
+
+\section{Components}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Component} & \textbf{Value} & \textbf{Quantity} \\
+\hline
+Breadboard & -- & 1 \\
+Resistor & $\geq 220\Omega$ & 1 \\
+Arduino & Uno & 1 \\
+Seven Segment Display & Common Anode & 1 \\
+Jumper Wires & -- & 20 \\
+\hline
+\end{tabular}
+\caption{Required Components}
+\end{table}
+
+\subsection{Breadboard}
+The breadboard can be divided into 5 segments. In each green segment, the pins are internally connected to have the same voltage. Similarly, in the central segments, the pins in each column are internally connected.
+
+\subsection{Seven Segment Display}
+The display has eight pins: a, b, c, d, e, f, g, and dot. These take an active LOW input, meaning the LED glows only when connected to ground.
+
+\subsection{Arduino}
+The Arduino Uno has ground pins, analog input pins A0–A3, and digital pins D1–D13. It also has 3.3V and 5V power pins. We use GND, 5V, and digital pins in this manual.
+
+\section{Display Control through Hardware}
+
+\subsection{Powering the Display}
+\textbf{Problem 2.1:} Plug the display into the breadboard and make the following connections:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Arduino} & \textbf{Breadboard} \\
+\hline
+5V & Top Green \\
+GND & Bottom Green \\
+\hline
+\end{tabular}
+\caption{Power Connections}
+\end{table}
+
+\textbf{Problem 2.2:} Make the following connections:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Breadboard} & \textbf{Display} \\
+\hline
+5V & Resistor \\
+COM & GND \\
+DOT & -- \\
+\hline
+\end{tabular}
+\caption{Display Connections}
+\end{table}
+
+\textbf{Problem 2.3:} Connect the Arduino to the computer. The DOT LED should glow.
+
+\subsection{Controlling the Display}
+\textbf{Problem 2.4:} Generate the number 1 by connecting pins b and c to GND.
+
+\textbf{Problem 2.5:} Repeat to generate the number 2.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Digit} & a & b & c & d & e & f & g \\
+\hline
+0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\
+1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+2 & 1 & 1 & 0 & 1 & 1 & 0 & 1 \\
+\hline
+\end{tabular}
+\caption{Segment Mapping for Digits}
+\end{table}
+
+\section{Display Control through Software}
+
+\textbf{Problem 3.1:} Make connections according to the previous table.
+
+\textbf{Problem 3.2:} Download and execute the following code using Arduino IDE:
+
+\begin{verbatim}
+wget https://raw.githubusercontent.com/gadepall/arduino/master/sevenseg/codes/sevenseg/sevenseg.ino
+\end{verbatim}
+
+\textbf{Problem 3.3:} Modify the program to generate digits 0–9.
+
+\vspace{1em}
+\noindent\textit{Note:} All content in this manual is released under GNU GPL. Free and open source.
+
+\end{document}
