@@ -1,0 +1,84 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx,geometry}
+\usepackage{array,url}
+\usepackage[breaklinks]{hyperref}
+\geometry{margin=1in}
+\usepackage{setspace}
+\usepackage{titling}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{minipage}{0.45\textwidth}
+  \includegraphics[width=\linewidth]{Logo.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+  \raggedleft
+  \textbf{Name: Surabhi P}\\
+  \textbf{Id: COMETFWC032}\\
+  \textbf{Date: 28 August 2025}
+\end{minipage}
+
+\vspace{1cm}
+
+\begin{center}
+\fbox{
+  \parbox{0.9\textwidth}{
+       \centering
+       \small
+
+       \url{https://github.com/surabhi84ard/Mini/tree/8e9042b13304f4b4923d330711d1eb424065bccb/Assembly}
+     }
+}
+\end{center}
+
+\section*{Abstract}
+This manual explains state machines by deconstructing a decade counter.
+
+\section{The Decade Counter}
+The block diagram of a decade counter (which repeatedly counts from 0 to 9) includes:
+\begin{itemize}
+  \item Incrementing Decoder
+  \item Display Decoder
+  \item Delay Block (Sequential Logic)
+\end{itemize}
+
+\section{Finite State Machine}
+\subsection*{FSM Structure}
+Fig. 1 shows the FSM diagram for the decade counter. The state \( S_0 \) corresponds to input 0000. The state transition table uses:
+\begin{itemize}
+  \item Present state: \( W, X, Y, Z \)
+  \item Next state: \( A, B, C, D \)
+\end{itemize}
+
+\subsection*{FSM Implementation}
+The FSM is implemented using D Flip-Flops. The flip-flops hold the input for a duration determined by the clock signal, forming the Delay block.
+
+\subsection*{Hardware Cost}
+The number of D Flip-Flops required is:
+
+
+\[
+\text{No. of Flip-Flops} = \lceil \log_2(\text{No. of States}) \rceil = \lceil \log_2(9) \rceil = 4
+\]
+
+
+
+\section{Design Exercises}
+\begin{enumerate}
+  \item Draw the state transition diagram for a decade down counter (counts from 9 to 0).
+  \item Write the state transition table for the down counter.
+  \item Derive the state transition equations with and without don't cares.
+  \item Verify your design using an Arduino.
+  \item Design a circuit that detects three consecutive 1s in a bitstream.
+\end{enumerate}
+
+\section*{References}
+[1] G. V. V. Sharma. Karnaugh Map. Available online:  
+\url{https://github.com/gadepall/arduino/raw/master/ide/kmap/gvv_kmap.pdf}
+
+\vspace{1em}
+\noindent\textit{Note:} All content in this manual is released under GNU GPL. Free and open source.
+
+\end{document}
