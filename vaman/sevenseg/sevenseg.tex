@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx,geometry}
+\usepackage{array,url}
+\usepackage[breaklinks]{hyperref}
+\geometry{margin=1in}
+\usepackage{setspace}
+\usepackage{titling}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{minipage}{0.45\textwidth}
+  \includegraphics[width=\linewidth]{Logo.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+  \raggedleft
+  \textbf{Name: Surabhi P}\\
+  \textbf{Id: COMETFWC032}\\
+  \textbf{Date: 17 Sept 2025}
+\end{minipage}
+
+\vspace{1cm}
+
+\begin{center}
+\fbox{
+     \parbox{0.9\textwidth}{
+       \centering
+       \small
+
+       \url{https://github.com/surabhi84ard/Mini/tree}
+     }
+}
+\end{center}
+\section*{Abstract}
+We show how to use Pygmy as a decade counter.
+
+\section{Software}
+All codes used in this manual are available at the following link
+\url{https://github.com/gadepall/vaman/tree/master/fpga/sevenseg/
+
+\section{Setup}
+
+\subsection{Pin Connections}
+Connect the pins in the bank J5 of the Pygmy with the seven segme
+
+\begin{table}[h!]
+\centering
+\caption{Seven segment display - Pygmy connection}
+\label{tab:connections}
+\begin{tabular}{ll}
+\textbf{Display} & \textbf{Pygmy} \\
+a & IO\_4 \\
+b & IO\_5 \\
+c & IO\_6 \\
+d & IO\_7 \\
+e & IO\_8 \\
+f & IO\_10 \\
+g & IO\_11 \\
+COM & 3.3V \\
+\end{tabular}
+\end{table}
+
+\subsection{Initial Code Execution}
+Flash the \texttt{helloworldfpga.bin} file to Pygmy. You should s
+
+\subsection{Segment Assignments}
+The following lines are used for generating numbers on the display
+
+\begin{verbatim}
+assign a = 0;
+assign b = 1;
+assign c = 0;
+assign d = 0;
+assign e = 1;
+assign f = 0;
+assign g = 0;
+\end{verbatim}
+
+Modify the above code using Table~\ref{tab:segmentvalues} to gene
+
+\begin{table}[h!]
+\centering
+\caption{Pin values used for generating decimal numbers on the se
+\label{tab:segmentvalues}
+\begin{tabular}{ll}
+\textbf{Decimal} & \textbf{abcdefg} \\
+0 & 1111110 \\
+1 & 0110000 \\
+2 & 1101101 \\
+3 & 1111001 \\
+4 & 0110011 \\
+5 & 1011011 \\
+6 & 1011111 \\
+7 & 1110000 \\
+8 & 1111111 \\
+9 & 1111011 \\
+\end{tabular}
+\end{table}
+
+\section{Examples}
+
+\subsection{Pin Configuration}
+Refer to Table~\ref{tab:connections} and the PU64 pin diagram in 
+
+\subsection{7-bit Word Control}
+Execute the following code to display the number 4:
+\begin{verbatim}
+gpio_out = 7'b0100100;
+\end{verbatim}
+
+\subsection{Verilog Function for Decimal Input}
+Use a Verilog function to take a decimal input and display it on 
+Code: \texttt{sevenseg\_dec.v}
+
+\subsection{Decade Counter}
+Use the Pygmy as a decade counter.
+Code: \texttt{decade\_counter.v}
+
+\section{Figures}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{Pin.png}
+\caption{Pygmy BB v1 Pin Diagram}
+\label{fig:pinout}
+\end{figure}
+
+\end{document}
