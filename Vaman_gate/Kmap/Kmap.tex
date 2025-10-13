@@ -1,0 +1,122 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\geometry{margin=1in}
+
+\definecolor{codegray}{gray}{0.9}
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!50!black},
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false,
+  captionpos=b
+}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Experiment: K-Map Based Logic Gate Design using VAMAN Board}} \\[6pt]
+\textbf{Course: Digital Logic Design using Verilog HDL}
+\end{center}
+
+\section*{Objective}
+To implement a simplified Boolean function derived from its Karnaugh Map (K-Map) and verify it on the VAMAN FPGA development board.
+
+\section*{Apparatus Required}
+\begin{itemize}
+  \item VAMAN FPGA Development Board (Spartan-6)
+  \item USB JTAG Programmer
+  \item On-board switches and LEDs
+  \item Xilinx ISE / Vivado Software
+\end{itemize}
+
+\section*{Boolean Function}
+The logic expression obtained from K-map simplification is:
+\[
+f = (b + c)(a + \overline{c})
+\]
+This expression represents the minimized Product of Sums (PoS) form.
+
+\section*{Truth Table}
+\begin{center}
+\begin{tabular}{ccc|c}
+\toprule
+A & B & C & F \\ 
+\midrule
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 0 \\
+1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 1 \\
+1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{K-Map Simplification}
+\[
+\begin{array}{c|cccc}
+AB \backslash C & 0 & 1 \\ \hline
+00 & 0 & 0 \\
+01 & 1 & 0 \\
+11 & 1 & 0 \\
+10 & 0 & 1 \\
+\end{array}
+\]
+The grouped 1s in the K-map lead to:
+\[
+f = (b + c)(a + \overline{c})
+\]
+
+\section*{Verilog Code}
+\begin{lstlisting}[language=Verilog, caption={Verilog Code for K-Map Simplified Logic Function}]
+module kmap_gate_vaman(
+    input wire a,
+    input wire b,
+    input wire c,
+    output wire f
+);
+
+assign f = (b | c) & (a | ~c);
+
+endmodule
+\end{lstlisting}
+
+\section*{Pin Configuration (VAMAN Board Example)}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Signal} & \textbf{FPGA Pin} & \textbf{Description} \\
+\midrule
+a & SW0 & Input Switch 0 \\
+b & SW1 & Input Switch 1 \\
+c & SW2 & Input Switch 2 \\
+f & LED0 & Output LED 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Result}
+The output LED glows whenever the logic expression \((b + c)(a + \overline{c})\) evaluates to HIGH, confirming correct implementation of the simplified K-map expression.
+
+\section*{Conclusion}
+The Verilog module successfully implements the minimized Boolean function obtained from the K-map.  
+This verifies the use of logical reduction techniques for efficient hardware implementation on the VAMAN FPGA board.
+
+\end{document}
