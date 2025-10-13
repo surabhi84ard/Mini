@@ -1,0 +1,132 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+\geometry{margin=1in}
+
+\definecolor{codegray}{gray}{0.9}
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!50!black},
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false,
+  captionpos=b
+}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Experiment: POS-based LED Blink using VAMAN Board}} \\[6pt]
+\textbf{Course: Digital Logic Design using Verilog HDL}
+\end{center}
+
+\section*{Objective}
+To design and implement a Verilog module that computes a function based on its \textbf{Product of Sums (PoS)} form and uses it to control the blinking of an LED on the VAMAN FPGA board.
+
+\section*{Apparatus Required}
+\begin{itemize}
+  \item VAMAN FPGA Development Board (based on Spartan-6)
+  \item USB JTAG Programmer
+  \item LEDs and Switches on board
+  \item Xilinx ISE / Vivado Software
+\end{itemize}
+
+\section*{Logic Description}
+The Boolean function is given as:
+\[
+f = (b + c)(a + \overline{c})
+\]
+
+The LED will blink only when the output of \( f \) is logic HIGH.  
+If \( f = 0 \), the LED remains OFF.
+
+\section*{Truth Table}
+\begin{center}
+\begin{tabular}{cccc|c}
+\toprule
+A & B & C & Expression & F \\ 
+\midrule
+0 & 0 & 0 & $(b+c)(a+\bar{c})$ & 0 \\
+0 & 0 & 1 & $(0+1)(0+\bar{1})=1\times0$ & 0 \\
+0 & 1 & 0 & $(1+0)(0+\bar{0})=1\times1$ & 1 \\
+0 & 1 & 1 & $(1+1)(0+\bar{1})=1\times0$ & 0 \\
+1 & 0 & 0 & $(0+0)(1+\bar{0})=0\times1$ & 0 \\
+1 & 0 & 1 & $(0+1)(1+\bar{1})=1\times1$ & 1 \\
+1 & 1 & 0 & $(1+0)(1+\bar{0})=1\times1$ & 1 \\
+1 & 1 & 1 & $(1+1)(1+\bar{1})=1\times0$ & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Simplified Boolean Expression}
+\[
+f = (b + c)(a + \overline{c})
+\]
+No further simplification is required since it is already in minimized PoS form.
+
+\section*{Verilog Code}
+\begin{lstlisting}[language=Verilog, caption={Verilog code for PoS-based LED blink}]
+module pos_blink(
+    input wire clk,     // clock input
+    input wire a,       // input a (example: connect to switch or pin)
+    input wire b,       // input b (example: connect to switch or pin)
+    input wire c,       // input c (example: connect to switch or pin)
+    output reg led      // LED output
+);
+
+reg [23:0] cnt = 0;
+
+// Compute minimized PoS: (b + c) & (a + ~c)
+wire f;
+assign f = (b | c) & (a | ~c);
+
+// Blink logic: LED blinks only when the PoS output f is high
+always @(posedge clk) begin
+    if (f) begin
+        cnt <= cnt + 1;
+        if (cnt == 24'd5000000) begin // adjust for desired blink rate
+            led <= ~led;
+            cnt <= 0;
+        end
+    end else begin
+        led <= 0;    // LED off when PoS output is low
+        cnt <= 0;
+    end
+end
+
+endmodule
+\end{lstlisting}
+
+\section*{Pin Configuration (VAMAN Board Example)}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Signal} & \textbf{FPGA Pin} & \textbf{Description} \\
+\midrule
+clk & P56 & On-board 50 MHz Clock \\
+a & SW0 & Input Switch 0 \\
+b & SW1 & Input Switch 1 \\
+c & SW2 & Input Switch 2 \\
+led & LED0 & Output LED 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Conclusion}
+The circuit successfully implements the given PoS expression.  
+The LED blinks at a fixed rate whenever the PoS output \( f = 1 \), and remains off otherwise.
+
+\end{document}
