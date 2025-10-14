@@ -1,0 +1,9 @@
+# Inputs
+set_io clk 44
+set_io rst 45
+set_io a 39
+set_io b 38
+set_io c 37
+
+# FSM output
+set_io out 99
