@@ -1,0 +1,10 @@
+# Assign clock to pin 44
+set_io clk 44
+
+# Assign inputs a, b, c to switches or buttons
+set_io a 39
+set_io b 38
+set_io c 37
+
+# Assign LED output to pin 99 (change as needed)
+set_io led 99
