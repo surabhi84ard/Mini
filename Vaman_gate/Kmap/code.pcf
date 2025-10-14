@@ -1,0 +1,10 @@
+# Assign clock input
+set_io clk 44
+
+# Assign three inputs to physical pins
+set_io a 39
+set_io b 38
+set_io c 37
+
+# Assign output to LED (or a display pin)
+set_io f 99
