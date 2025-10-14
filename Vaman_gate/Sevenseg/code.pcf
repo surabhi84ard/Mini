@@ -1,0 +1,16 @@
+# Inputs
+set_io a 39
+set_io b 38
+set_io c 37
+
+# Segments a-g (change pins for your board)
+set_io seg[0] 56
+set_io seg[1] 57
+set_io seg[2] 58
+set_io seg[3] 59
+set_io seg[4] 60
+set_io seg[5] 61
+set_io seg[6] 62
+
+# (Optional) Common Anode/Cathode pin
+# set_io com 55
