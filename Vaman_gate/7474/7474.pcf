@@ -1,0 +1,11 @@
+# Inputs
+set_io clk 44
+set_io a 39
+set_io b 38
+set_io c 37
+
+# Output to D input on 7474
+set_io D_out 56
+
+# (Q output from 7474 can be connected to FPGA/LED if needed)
+# set_io Q 99
