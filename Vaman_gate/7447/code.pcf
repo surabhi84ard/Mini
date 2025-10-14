@@ -1,0 +1,12 @@
+# Inputs to FPGA
+set_io a 39
+set_io b 38
+set_io c 37
+
+# BCD outputs to 7447 IC
+set_io bcd[0] 56
+set_io bcd[1] 57
+set_io bcd[2] 58
+set_io bcd[3] 59
+
+# (7447 IC will drive the 7-segment display)
