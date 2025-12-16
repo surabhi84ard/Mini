@@ -1,0 +1,173 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{flushend}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{IIITB COMET}
+\rfoot{\thepage}
+
+\title{\textbf{5G NR Radio Protocol Stack:\\Roles of L1, L2 and L3}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{flushright}
+\textbf{Training Specialist:} S. Sriknath Reddy\\
+\textbf{Name:} Surabhi P\\
+\textbf{ID:} COMETFWC032
+\end{flushright}
+
+\onehalfspacing
+
+\section{Introduction}
+
+5G New Radio (NR) organizes the radio interface into three main layers: the physical layer (L1), the data link layer (L2) and the radio resource control layer (L3). These layers jointly deliver user data and control signaling between the UE and the gNB while meeting 5G targets such as eMBB, URLLC and mMTC. 
+
+Key characteristics of the NR protocol stack include:
+\begin{itemize}
+  \item Clear separation of user plane and control plane.
+  \item Flexible numerology and frame structure at L1.
+  \item QoS-flow-based design and SDAP introduction at L2.
+  \item RRC-based configuration and mobility at L3.
+\end{itemize}
+
+\section{Layer 3: RRC and NAS}
+
+\subsection{L3 Position and Functions}
+
+Layer 3 contains the Radio Resource Control (RRC) protocol and provides the interface toward NAS procedures in the 5G Core. RRC terminates in the UE and gNB and orchestrates configuration of lower layers, mobility, security and radio bearers.
+
+Major L3 tasks include:
+\begin{itemize}
+  \item Managing RRC states and transitions.
+  \item Broadcasting system information (MIB/SIBs).
+  \item Setting up, modifying and releasing radio bearers.
+  \item Triggering handovers and mobility-related measurements.
+  \item Activating ciphering and integrity protection at PDCP.
+\end{itemize}
+
+\subsection{RRC States and Services}
+
+5G NR introduces three primary RRC states: RRC\_IDLE, RRC\_INACTIVE and RRC\_CONNECTED. RRC\_INACTIVE provides a compromise between low signaling load and fast connection resumption, which is especially useful for frequent but bursty data traffic.
+
+Their high-level behavior is:
+\begin{itemize}
+  \item \textbf{RRC\_IDLE}: Cell camping, cell reselection, paging reception.
+  \item \textbf{RRC\_INACTIVE}: UE context stored, reduced signaling, quick resume.
+  \item \textbf{RRC\_CONNECTED}: Dedicated resources, continuous data transfer.
+\end{itemize}
+
+\section{Layer 2 Overview}
+
+\subsection{L2 Sublayers and Split}
+
+Layer 2 is decomposed into SDAP, PDCP, RLC and MAC, with specific combinations per plane. In the user plane, SDAP, PDCP, RLC and MAC sit above PHY, while in the control plane only PDCP, RLC and MAC are used below RRC.
+
+At a glance, L2 sublayers provide:
+\begin{itemize}
+  \item \textbf{SDAP}: QoS flow to DRB mapping.
+  \item \textbf{PDCP}: Security, header compression, reordering.
+  \item \textbf{RLC}: Segmentation, ARQ and reassembly.
+  \item \textbf{MAC}: Scheduling, multiplexing and HARQ coordination.
+\end{itemize}
+
+\subsection{SDAP: QoS Flow Mapping}
+
+SDAP terminates only for user-plane data and aligns the radio interface with 5G QoS flows defined in the core network. Each packet is associated with a QoS Flow Identifier (QFI), which guides its treatment over the radio link. 
+
+Core SDAP functions are: 
+\begin{itemize}
+  \item Mapping QoS flows to DRBs and vice versa.
+  \item Supporting one-to-one or many-to-one flow–bearer associations.
+  \item Applying reflective QoS, where the UE derives uplink QoS from downlink rules.
+\end{itemize}
+
+\subsection{PDCP: Security, Compression and Duplication}
+
+PDCP is the first L2 sublayer below RRC in the control plane and below SDAP in the user plane. It ensures confidentiality and integrity (for control plane) and optimizes header overhead to improve radio efficiency.
+Typical PDCP responsibilities include: 
+\begin{itemize}
+  \item Ciphering of user and control plane PDUs.
+  \item Integrity protection for control plane messages.
+  \item Robust Header Compression (ROHC) for IP packets.
+  \item Sequence numbering, reordering and duplicate detection.
+  \item PDCP duplication for URLLC, sending PDUs over multiple legs.
+\end{itemize}
+
+\subsection{RLC: Modes and Reliability}
+
+RLC sits below PDCP and above MAC and can operate in three modes to balance reliability and latency. Its protocol data units carry sequence numbers and support segmentation or concatenation of PDCP SDUs.
+
+The three RLC modes are:
+\begin{itemize}
+  \item \textbf{Transparent Mode (TM)}: No RLC headers, mainly for certain control channels.
+  \item \textbf{Unacknowledged Mode (UM)}: No retransmissions, low latency, with reordering.
+  \item \textbf{Acknowledged Mode (AM)}: ARQ-based retransmissions and error recovery.
+\end{itemize}
+
+\subsection{MAC: Scheduling and HARQ Handling}
+
+The MAC sublayer connects logical channels from RLC to transport channels of the physical layer. It consolidates packets from various logical channels, assigns priorities and interacts with the scheduler to allocate radio resources. 
+
+Key MAC functions are: 
+\begin{itemize}
+  \item Multiplexing/demultiplexing of logical channels.
+  \item Uplink and downlink scheduling, including grant handling.
+  \item Buffer Status Reporting and Scheduling Request processing.
+  \item HARQ process management and soft combining support.
+\end{itemize}
+
+\section{Layer 1: Physical Layer}
+
+\subsection{Waveform, Numerology and Frame Structure}
+
+The NR physical layer is based on OFDM with scalable numerology, allowing different subcarrier spacings for different services and frequency bands. Subcarrier spacing is given by \(\Delta f = 15 \times 2^n\) kHz, which helps tailor latency, coverage and Doppler robustness. 
+
+Important physical layer characteristics include: 
+\begin{itemize}
+  \item CP-OFDM for downlink and uplink data.
+  \item Optional DFT-s-OFDM in uplink for better power efficiency.
+  \item Flexible frame and slot durations to support low-latency services.
+  \item Operation over FR1 and FR2 (mmWave) bands.
+\end{itemize}
+
+\subsection{MIMO, Beamforming and HARQ}
+
+5G NR embraces massive MIMO and beamforming to increase capacity and coverage, especially in higher frequency bands. Beam management procedures across L1/L2 enable initial access, beam refinement and robust mobility.
+
+From a reliability perspective, NR employs:
+\begin{itemize}
+  \item Advanced precoding schemes for spatial multiplexing.
+  \item HARQ with soft combining for fast error recovery.
+  \item High-order modulations up to 256QAM on data channels.
+\end{itemize}
+
+\subsection{Physical Channels and Coding}
+
+Several downlink and uplink physical channels are defined, each mapped to specific transport and logical channels. Data channels such as PDSCH and PUSCH use LDPC codes, while control channels like PDCCH rely on polar codes.
+
+Example physical channels and features: 
+\begin{itemize}
+  \item \textbf{PDCCH}: Carries downlink control information, uses polar coding, mapped into CORESETs.
+  \item \textbf{PDSCH}: Main downlink data channel, using LDPC, higher-order modulation and DMRS-based channel estimation.
+  \item \textbf{PUCCH/ PUSCH}: Uplink control and data channels with suitable reference signals and coding.
+\end{itemize}
+
+\section{End-to-End L1/L2/L3 Interaction}
+
+In the user plane, IP packets from the 5G Core are associated with QoS flows at SDAP, secured and optionally compressed at PDCP, segmented at RLC, scheduled at MAC and finally transmitted via the NR physical layer. This chain allows differentiated QoS per flow while efficiently using radio resources. 
+
+In the control plane, RRC messages traverse PDCP, RLC, MAC and PHY, enabling system information broadcast, connection management, mobility and security control. The close coupling of L1, L2 and L3 procedures is fundamental to achieving the performance targets of 5G NR.
+
+\end{document}
