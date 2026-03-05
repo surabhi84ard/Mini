@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIITB COMET Program Registration & Payment</title>
+    
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- Essential SEO Meta Tags -->
+    <meta name="description" content="IIITB COMET Foundation Program Registration & Payment Portal. Secure online payment for Future Wireless Communications certification program.">
+    <meta name="keywords" content="IIITB payment, COMET registration, 5G course payment, wireless communications enrollment">
+    <meta name="author" content="IIITB COMET Foundation">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IIITB COMET - Program Registration">
+    <meta property="og:description" content="Secure registration and payment portal for Future Wireless Communications Program">
+    <meta property="og:image" content="https://yourwebsite.com/static/images/comet.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourwebsite.com/payment.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link rel="apple-touch-icon" href="static/images/comet.jpg">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#2E60A9">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --iitb-blue: #2e60a9;
+            --iitb-yellow: #ffcc00;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+        }
+        
+        .top-header-bg {
+            background-color: var(--iitb-yellow);
+        }
+        
+        .header-bg {
+            background-color: white;
+            border-bottom: 2px solid var(--iitb-blue);
+        }
+        
+        .text-blue {
+            color: var(--iitb-blue);
+        }
+        
+        .border-blue {
+            border-color: var(--iitb-blue);
+        }
+        
+        .bg-step-active {
+            background-color: var(--iitb-blue);
+        }
+        
+        .text-yellow {
+            color: var(--iitb-yellow);
+        }
+        
+        .input-text-area {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            transition: all 0.15s ease;
+        }
+        
+        .input-text-area:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+        
+        .step-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        .required-star {
+            color: #d9534f;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        .step-number-ring {
+            border: 2px solid;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .summary-label {
+            color: #374151;
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        /* Term selection styles */
+        .term-option {
+            display: none;
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--iitb-blue);
+        }
+        
+        .term-option.visible {
+            display: block;
+        }
+        
+        .term-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    
+    <!-- Top Yellow Bar -->
+    <div class="top-header-bg py-1"></div>
+    
+    <!-- Header -->
+    <header class="header-bg shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="static/images/comet.jpg" alt="IIITB COMET Logo" class="h-8 md:h-10" loading="lazy">
+                <h1 class="text-lg md:text-xl lg:text-2xl font-bold text-blue">
+                    Future Wireless Communications Program Registration
+                </h1>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Step Indicator -->
+    <div class="bg-white py-4 mb-8 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div id="step-indicator" class="flex justify-around items-center max-w-4xl mx-auto">
+                <!-- Steps rendered by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 flex-grow mb-12">
+        <div id="app-content" class="bg-white p-8 md:p-12 rounded-xl shadow-2xl max-w-3xl mx-auto step-transition">
+            <!-- Loading Spinner -->
+            <div class="flex justify-center items-center h-64" id="loading-spinner">
+                <i class="fas fa-spinner fa-spin text-4xl text-blue"></i>
+                <p class="ml-3 text-blue font-medium">Initializing Secure Environment...</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-4 mt-auto">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 IIITB COMET. All Rights Reserved. Secure Transactions.</p>
+        </div>
+    </footer>
+    
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, setDoc, collection, addDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Environment Variables
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        let firebaseConfig = null;
+
+        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+            try {
+                firebaseConfig = JSON.parse(__firebase_config);
+            } catch (e) {
+                console.error("Error parsing Firebase config:", e);
+            }
+        }
+
+        if (!firebaseConfig) {
+            console.error("Firebase config missing. Using fallback.");
+            firebaseConfig = {
+                apiKey: "fallback",
+                authDomain: "fallback",
+                projectId: "fallback"
+            };
+        }
+
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId = null;
+        let isAuthReady = false;
+
+        // Global State
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        const studentData = {
+            name: '',
+            contact: '',
+            email: '',
+            occupation: 'Select One',
+            organization: '',
+            address: '',
+            state: '',
+            modules: [], // Will store objects like {id: 2, term: 1}
+            subTotal: 0,
+            convenienceFee: 0,
+            grandTotal: 0,
+            timestamp: null,
+            paymentMode: null,
+            paymentStatus: 'Pending',
+            transactionDetails: {},
+            registrationId: null
+        };
+
+        // UPDATED: Module structure with term options
+        const courseModules = [
+            { 
+                id: 1, 
+                name: 'Module 1', 
+                hasTerms: false,
+                fee: 45000 
+            },
+            { 
+                id: 2, 
+                name: 'Module 2', 
+                hasTerms: true,
+                terms: [
+                    { id: 1, name: 'Term 1', fee: 45000 },
+                    { id: 2, name: 'Term 2', fee: 30000 },
+                    { id: 3, name: 'Full Payment', fee: 75000 }
+                ],
+                fullFee: 75000
+            },
+            { 
+                id: 3, 
+                name: 'Module 3', 
+                hasTerms: true,
+                terms: [
+                    { id: 1, name: 'Term 1', fee: 45000 },
+                    { id: 2, name: 'Term 2', fee: 30000 },
+                    { id: 3, name: 'Full Payment', fee: 75000 }
+                ],
+                fullFee: 75000
+            }
+        ];
+
+        // Firebase Initialization
+        async function initializeFirebase() {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            const fallbackTimer = setTimeout(() => {
+                if (!isAuthReady) {
+                    userId = crypto.randomUUID();
+                    isAuthReady = true;
+                    if (loadingSpinner) loadingSpinner.style.display = 'none';
+                    renderApp();
+                }
+            }, 5000);
+
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Firebase Auth Error:", error);
+            }
+
+            onAuthStateChanged(auth, (user) => {
+                clearTimeout(fallbackTimer);
+                if (user) {
+                    userId = user.uid;
+                } else {
+                    userId = crypto.randomUUID();
+                }
+                isAuthReady = true;
+                if (loadingSpinner) loadingSpinner.style.display = 'none';
+                renderApp();
+            });
+        }
+
+        // Firestore Functions
+        function getRegistrationCollectionRef() {
+            if (!db || !userId) {
+                console.error("Database not initialized or User ID missing.");
+                return null;
+            }
+            return collection(db, `apps/${appId}/registrations`);
+        }
+
+        async function saveRegistrationToFirestore(status) {
+            const collectionRef = getRegistrationCollectionRef();
+            if (!collectionRef) {
+                alertUserError("Could not save registration. Database not ready.");
+                return false;
+            }
+
+            try {
+                const dataToSave = {
+                    ...studentData,
+                    timestamp: new Date().toISOString(),
+                    paymentStatus: status,
+                    appUserId: userId
+                };
+
+                if (studentData.registrationId) {
+                    await setDoc(doc(collectionRef, studentData.registrationId), dataToSave, { merge: true });
+                    console.log("Registration updated:", studentData.registrationId);
+                } else {
+                    const docRef = await addDoc(collectionRef, dataToSave);
+                    studentData.registrationId = docRef.id;
+                    console.log("Registration saved:", docRef.id);
+                }
+
+                studentData.paymentStatus = status;
+                return true;
+
+            } catch (e) {
+                console.error("Error saving document:", e);
+                alertUserError("Error saving registration data. Please try again.");
+                return false;
+            }
+        }
+
+        function alertUserError(message) {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="text-center p-8 bg-red-100 border border-red-400 rounded-xl">
+                    <p class="text-red-700 font-semibold">${message}</p>
+                    <button onclick="window.location.reload()" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">
+                        Retry
+                    </button>
+                </div>
+            `;
+        }
+
+        // UPDATED: Fee Calculation with term support
+        function calculateFees() {
+            let subTotal = 0;
+            
+            studentData.modules.forEach(selection => {
+                const module = courseModules.find(m => m.id === selection.id);
+                if (!module) return;
+                
+                if (module.hasTerms && selection.term) {
+                    const term = module.terms.find(t => t.id === selection.term);
+                    if (term) {
+                        subTotal += term.fee;
+                    }
+                } else {
+                    subTotal += module.fee;
+                }
+            });
+
+            let grandTotal = subTotal;
+
+            studentData.subTotal = subTotal;
+            studentData.grandTotal = grandTotal;
+
+            return { subTotal, grandTotal };
+        }
+
+        // Helper function to get module/term display name
+        function getModuleDisplayName(selection) {
+            const module = courseModules.find(m => m.id === selection.id);
+            if (!module) return 'Unknown Module';
+            
+            if (module.hasTerms && selection.term) {
+                const term = module.terms.find(t => t.id === selection.term);
+                return `${module.name} - ${term ? term.name : 'Unknown Term'}`;
+            }
+            return module.name;
+        }
+
+        // Helper function to get module/term fee
+        function getModuleFee(selection) {
+            const module = courseModules.find(m => m.id === selection.id);
+            if (!module) return 0;
+            
+            if (module.hasTerms && selection.term) {
+                const term = module.terms.find(t => t.id === selection.term);
+                return term ? term.fee : 0;
+            }
+            return module.fee;
+        }
+
+        // Main Render Function
+        function renderApp() {
+            if (!isAuthReady) return;
+
+            renderStepIndicator();
+            const content = document.getElementById('app-content');
+
+            content.style.opacity = 0;
+            content.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                switch (currentStep) {
+                    case 1:
+                        content.innerHTML = renderInstructions();
+                        break;
+                    case 2:
+                        content.innerHTML = renderStudentDetailsForm();
+                        attachFormListeners();
+                        break;
+                    case 3:
+                        content.innerHTML = renderModuleSelection();
+                        attachModuleListeners();
+                        break;
+                    case 4:
+                        content.innerHTML = renderRegistrationSummary();
+                        break;
+                    case 5:
+                        content.innerHTML = renderPaymentGateway();
+                        break;
+                    case 6:
+                        content.innerHTML = renderConfirmationPage();
+                        break;
+                    default:
+                        content.innerHTML = '<h2 class="text-xl text-red-600">Error: Invalid Step</h2>';
+                }
+
+                content.style.opacity = 1;
+                content.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // Step 1: Instructions
+        function renderInstructions() {
+            return `
+                <h2 class="text-3xl font-extrabold text-blue text-center mb-6">Welcome to Program Registration</h2>
+                <div class="space-y-4 text-gray-700 max-w-lg mx-auto">
+                    <p class="text-lg font-semibold border-b pb-2 text-blue">IMPORTANT INSTRUCTIONS:</p>
+                    <ul class="list-disc list-inside space-y-3 text-left pl-4">
+                        <li>Please fill all required details clearly.</li>
+                        <li>Required fields are marked with <span class="required-star">*</span>.</li>
+                        <li>Module 2 and Module 3 can be paid in two terms.</li>
+                        <li>This is a five-step process: Details → Modules → Summary → Payment → Confirmation.</li>
+                        <li>All data will be securely saved to our database.</li>
+                    </ul>
+                </div>
+                <div class="flex justify-center mt-10">
+                    <button onclick="nextStep()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-lg shadow-lg transition duration-200 uppercase text-lg">
+                        Start Registration
+                    </button>
+                </div>
+            `;
+        }
+
+        // Step 2: Student Details Form (unchanged)
+        function renderStudentDetailsForm() {
+            return `
+                <h2 class="text-2xl font-bold text-blue text-center mb-8">STEP 2: Student Details</h2>
+                <form id="student-details-form">
+                    <div class="bg-gray-50 p-6 md:p-8 rounded-xl border border-gray-200 shadow-inner space-y-6">
+                        
+                        <div class="space-y-1">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name<span class="required-star">*</span></label>
+                            <input type="text" id="name" name="name" class="input-text-area" value="${studentData.name}" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="contact" class="block text-sm font-medium text-gray-700">Contact Number<span class="required-star">*</span></label>
+                            <input type="tel" id="contact" name="contact" class="input-text-area" value="${studentData.contact}" pattern="[0-9]{10,15}" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email<span class="required-star">*</span></label>
+                            <input type="email" id="email" name="email" class="input-text-area" value="${studentData.email}" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="occupation" class="block text-sm font-medium text-gray-700">Occupation<span class="required-star">*</span></label>
+                            <select id="occupation" name="occupation" class="input-text-area" required>
+                                <option value="Select One" ${studentData.occupation === 'Select One' ? 'selected' : ''}>Select One</option>
+                                <option value="Student" ${studentData.occupation === 'Student' ? 'selected' : ''}>Student</option>
+                                <option value="Professional" ${studentData.occupation === 'Professional' ? 'selected' : ''}>Professional</option>
+                                <option value="Other" ${studentData.occupation === 'Other' ? 'selected' : ''}>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="organization" class="block text-sm font-medium text-gray-700">Organization<span class="required-star">*</span></label>
+                            <input type="text" id="organization" name="organization" class="input-text-area" value="${studentData.organization}" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="state" class="block text-sm font-medium text-gray-700">State<span class="required-star">*</span></label>
+                            <input type="text" id="state" name="state" class="input-text-area" value="${studentData.state}" required>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="address" class="block text-sm font-medium text-gray-700">Complete Address<span class="required-star">*</span></label>
+                            <textarea id="address" name="address" class="input-text-area h-24 resize-none" required>${studentData.address}</textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button type="button" onclick="prevStep()" class="text-blue hover:text-blue-700 font-semibold transition">
+                            ← Back
+                        </button>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            `;
+        }
+
+        // UPDATED: Step 3 - Module Selection with Terms
+        function renderModuleSelection() {
+            const moduleOptions = courseModules.map(mod => {
+                const isSelected = studentData.modules.some(m => m.id === mod.id);
+                
+                if (!mod.hasTerms) {
+                    // Simple module (Module 1)
+                    return `
+                        <div class="p-4 border rounded-lg hover:bg-gray-50 transition">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="module-${mod.id}" 
+                                           class="module-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" 
+                                           ${isSelected ? 'checked' : ''} 
+                                           data-module-id="${mod.id}">
+                                    <label for="module-${mod.id}" class="ml-3 font-medium text-gray-900">${mod.name}</label>
+                                </div>
+                                <span class="text-lg font-semibold text-blue-800">₹ ${mod.fee.toLocaleString('en-IN')}</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Module with terms (Module 2 & 3)
+                    const selectedTerm = studentData.modules.find(m => m.id === mod.id)?.term || null;
+                    
+                    return `
+                        <div class="border rounded-lg hover:bg-gray-50 transition">
+                            <div class="p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="module-${mod.id}" 
+                                               class="module-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" 
+                                               ${isSelected ? 'checked' : ''} 
+                                               data-module-id="${mod.id}"
+                                               data-has-terms="true">
+                                        <label for="module-${mod.id}" class="ml-3 font-medium text-gray-900">${mod.name}</label>
+                                    </div>
+                                    <span class="text-sm text-gray-600">Select term below</span>
+                                </div>
+                                
+                                <!-- Term Selection -->
+                                <div id="terms-${mod.id}" class="term-option ${isSelected ? 'visible' : ''}">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Choose Payment Term:</p>
+                                    ${mod.terms.map(term => `
+                                        <div class="term-label">
+                                            <label class="flex items-center cursor-pointer">
+                                                <input type="radio" 
+                                                       name="term-module-${mod.id}" 
+                                                       value="${term.id}"
+                                                       class="term-radio h-4 w-4 text-blue-600"
+                                                       data-module-id="${mod.id}"
+                                                       data-term-id="${term.id}"
+                                                       ${selectedTerm === term.id ? 'checked' : ''}
+                                                       ${!isSelected ? 'disabled' : ''}>
+                                                <span class="ml-2 text-sm text-gray-700">${term.name}</span>
+                                            </label>
+                                            <span class="text-sm font-semibold text-blue-800">₹ ${term.fee.toLocaleString('en-IN')}</span>
+                                        </div>
+                                    `).join('')}
+                                    <p class="text-xs text-gray-500 mt-2 italic">Full module fee: ₹ ${mod.fullFee.toLocaleString('en-IN')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+
+            return `
+                <h2 class="text-2xl font-bold text-blue text-center mb-8">STEP 3: Module Selection</h2>
+                <div class="bg-gray-50 p-6 md:p-8 rounded-xl border border-gray-200 shadow-inner space-y-4 mb-8">
+                    <p class="font-semibold text-lg text-blue-800 border-b pb-2">Select Modules & Payment Terms:</p>
+                    <div class="space-y-4">${moduleOptions}</div>
+                </div>
+                <p id="module-error" class="text-red-600 mt-2 hidden">Please select at least one module and choose a payment term.</p>
+                <div class="flex justify-between pt-8">
+                    <button type="button" onclick="prevStep()" class="text-blue hover:text-blue-700 font-semibold transition">
+                        ← Back
+                    </button>
+                    <button type="button" id="pay-now-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition">
+                        Proceed to Summary
+                    </button>
+                </div>
+            `;
+        }
+
+        // UPDATED: Step 4 - Summary with term details
+        function renderRegistrationSummary() {
+            const fees = calculateFees();
+            const selectedModulesHtml = studentData.modules.map(selection => {
+                const displayName = getModuleDisplayName(selection);
+                const fee = getModuleFee(selection);
+                return `<li class="ml-4 list-disc text-gray-700">${displayName} (₹ ${fee.toLocaleString('en-IN')})</li>`;
+            }).join('');
+
+            return `
+                <h2 class="text-2xl font-bold text-blue text-center mb-8">STEP 4: Registration Summary</h2>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-6 border border-gray-200 shadow-inner">
+                    <p class="font-semibold text-lg text-blue-700 mb-3 border-b pb-2">Selected Modules & Terms:</p>
+                    <ul class="space-y-1">${selectedModulesHtml}</ul>
+                </div>
+
+                <div class="bg-white border border-blue-200 p-6 rounded-xl shadow-md space-y-2">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4">Payment Breakdown</h3>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Module Sub-Total:</span>
+                        <span class="summary-value">₹ ${fees.subTotal.toLocaleString('en-IN')}</span>
+                    </div>
+                    
+                    <div class="summary-row border-t-4 border-double border-blue-400 pt-3">
+                        <span class="summary-label text-xl font-extrabold text-blue-900">GRAND TOTAL:</span>
+                        <span class="summary-value text-xl font-extrabold text-blue-900">₹ ${fees.grandTotal.toLocaleString('en-IN')}</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between pt-8">
+                    <button type="button" onclick="prevStep()" class="text-blue hover:text-blue-700 font-semibold transition">
+                        ← Back
+                    </button>
+                    <button type="button" onclick="nextStep()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition">
+                        Proceed to Payment
+                    </button>
+                </div>
+            `;
+        }
+
+        // Step 5: Payment Gateway (unchanged)
+        function renderPaymentGateway() {
+            const totalAmount = studentData.grandTotal.toLocaleString('en-IN');
+
+            return `
+                <h2 class="text-2xl font-bold text-blue text-center mb-8">STEP 5: Payment</h2>
+                
+                <div class="text-center mb-8 p-4 bg-yellow-100 border border-yellow-300 rounded-lg">
+                    <p class="text-xl font-bold text-blue-900">Amount to Pay: ₹ ${totalAmount}</p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 max-w-md mx-auto">
+                    
+                    <div class="flex items-center justify-center gap-2 mb-6">
+                        <i class="fas fa-qrcode text-2xl" style="color:#2e60a9"></i>
+                        <h3 class="text-xl font-bold" style="color:#2e60a9">Scan & Pay via UPI</h3>
+                    </div>
+
+                    <div class="flex justify-center mb-5">
+                        <div class="border-4 rounded-xl overflow-hidden shadow-md" style="border-color:#2e60a9; padding:10px; background:#fff;">
+                            <img src="static/images/qr.png" alt="QR Code" loading="lazy" class="block" style="width:220px; height:220px; object-fit:contain;"
+                                 onerror="this.parentElement.innerHTML='<div style=width:220px;height:220px;display:flex;align-items:center;justify-content:center;background:#f0f4ff;border-radius:8px;><p style=color:#2e60a9;font-weight:700;text-align:center;padding:1rem;>QR Image<br>Not Found</p></div>';">
+                        </div>
+                    </div>
+
+                    <ol class="text-sm text-gray-600 space-y-2 mb-6 text-left list-none">
+                        <li class="flex items-start gap-2">
+                            <span class="font-bold rounded-full text-white text-xs w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5" style="background:#2e60a9;">1</span>
+                            Open any UPI app
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="font-bold rounded-full text-white text-xs w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5" style="background:#2e60a9;">2</span>
+                            Scan the QR code above
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="font-bold rounded-full text-white text-xs w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5" style="background:#2e60a9;">3</span>
+                            Enter amount <strong>₹ ${totalAmount}</strong>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="font-bold rounded-full text-white text-xs w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5" style="background:#2e60a9;">4</span>
+                            Click "Confirm Payment" below
+                        </li>
+                    </ol>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 mb-6 text-sm text-blue-800">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        <strong>Note:</strong> Do not close this window until confirmed.
+                    </div>
+
+                    <button onclick="handlePaymentAttempt('QR / UPI', { type: 'QR Scan', amount: '${totalAmount}' })"
+                            class="w-full text-white font-bold py-3 rounded-xl shadow-md transition"
+                            style="background:#16a34a;"
+                            onmouseover="this.style.background='#15803d'"
+                            onmouseout="this.style.background='#16a34a'">
+                        <i class="fas fa-check-circle mr-2"></i> Confirm Payment of ₹ ${totalAmount}
+                    </button>
+                </div>
+
+                <div class="flex justify-start pt-8 max-w-md mx-auto">
+                    <button type="button" onclick="prevStep()" class="text-blue hover:text-blue-700 font-semibold transition">
+                        ← Back
+                    </button>
+                </div>
+            `;
+        }
+
+        // Handle Payment
+        async function handlePaymentAttempt(mode, details) {
+            studentData.paymentMode = mode;
+            studentData.transactionDetails = { ...details, attemptTime: new Date().toISOString() };
+
+            await saveRegistrationToFirestore(`Processing - ${mode}`);
+
+            const appContent = document.getElementById('app-content');
+            appContent.innerHTML = `
+                <div class="text-center p-8 bg-blue-100 border border-blue-400 rounded-xl">
+                    <i class="fas fa-spinner fa-spin text-5xl text-blue-600 mb-4"></i>
+                    <p class="text-xl font-semibold text-blue-700">Processing Payment via ${mode}...</p>
+                    <p class="text-sm text-gray-600 mt-2">Do not close this window.</p>
+                </div>
+            `;
+
+            setTimeout(async () => {
+                const transactionId = `TXN-${Date.now()}-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+                studentData.transactionDetails.transactionId = transactionId;
+
+                const success = await saveRegistrationToFirestore('Success - Payment Completed');
+
+                if (success) {
+                    await sendToGoogleSheets(studentData);
+                }
+
+                if (success) {
+                    currentStep = 6;
+                    renderApp();
+                } else {
+                    alertUserError("Payment processed, but error saving status. Contact support.");
+                }
+            }, 2000);
+        }
+
+        // Step 6: Confirmation
+        function renderConfirmationPage() {
+            const transactionId = studentData.transactionDetails.transactionId || 'N/A';
+
+            return `
+                <h2 class="text-3xl font-extrabold text-green-600 text-center mb-6">Payment Successful!</h2>
+                <div class="text-center p-8 border-4 border-double border-green-400 rounded-xl max-w-lg mx-auto bg-green-50">
+                    <i class="fas fa-check-circle text-7xl text-green-500 mb-6"></i>
+                    <p class="text-xl font-semibold text-gray-800">Your registration is complete.</p>
+
+                    <div class="mt-6 space-y-2 text-left bg-white p-4 rounded-lg shadow-inner">
+                        <p class="font-medium text-gray-700">Registration ID: <span class="font-mono text-blue-800">${studentData.registrationId || 'N/A'}</span></p>
+                        <p class="font-medium text-gray-700">Transaction ID: <span class="font-mono text-blue-800">${transactionId}</span></p>
+                        <p class="font-medium text-gray-700">Amount Paid: <span class="text-xl font-extrabold text-green-700">₹ ${studentData.grandTotal.toLocaleString('en-IN')}</span></p>
+                    </div>
+
+                    <button onclick="downloadFeeReceipt()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg mt-8 transition">
+                        <i class="fas fa-download mr-2"></i> Download Receipt
+                    </button>
+                </div>
+            `;
+        }
+
+        // UPDATED: Download Receipt with term details
+        function downloadFeeReceipt() {
+            const date = new Date().toLocaleDateString('en-IN');
+            const modulesList = studentData.modules.map(selection => {
+                const displayName = getModuleDisplayName(selection);
+                const fee = getModuleFee(selection);
+                return `- ${displayName}: ₹ ${fee.toLocaleString('en-IN')}`;
+            }).join('\n');
+
+            const receiptContent = `
+IIITB COMET FOUNDATION - Official Fee Receipt
+═══════════════════════════════════════════════
+
+Transaction Details:
+• Receipt Date: ${date}
+• Registration ID: ${studentData.registrationId || 'N/A'}
+• Transaction ID: ${studentData.transactionDetails.transactionId || 'N/A'}
+• Payment Mode: ${studentData.paymentMode || 'Online'}
+
+Student Details:
+• Name: ${studentData.name}
+• Email: ${studentData.email}
+• Contact: ${studentData.contact}
+
+Fee Breakdown:
+• Module Sub-Total: ₹ ${studentData.subTotal.toLocaleString('en-IN')}
+• GRAND TOTAL PAID: ₹ ${studentData.grandTotal.toLocaleString('en-IN')}
+
+Modules/Terms Purchased:
+${modulesList}
+
+═══════════════════════════════════════════════
+This is an electronically generated receipt.
+            `;
+
+            const blob = new Blob([receiptContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Receipt_COMET_${studentData.registrationId || 'TEMP'}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Form Listeners
+        function attachFormListeners() {
+            const form = document.getElementById('student-details-form');
+            if (form) {
+                form.onsubmit = function (event) {
+                    event.preventDefault();
+                    const formData = new FormData(form);
+                    for (const [key, value] of formData.entries()) {
+                        studentData[key] = value;
+                    }
+                    window.nextStep();
+                };
+            }
+        }
+
+        // UPDATED: Module Listeners with term support
+        function attachModuleListeners() {
+            const checkboxes = document.querySelectorAll('.module-checkbox');
+            const payButton = document.getElementById('pay-now-button');
+            const errorElement = document.getElementById('module-error');
+
+            // Handle module checkbox changes
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const moduleId = parseInt(this.dataset.moduleId);
+                    const hasTerms = this.dataset.hasTerms === 'true';
+                    const termsContainer = document.getElementById(`terms-${moduleId}`);
+                    
+                    if (this.checked) {
+                        // Show terms if applicable
+                        if (hasTerms && termsContainer) {
+                            termsContainer.classList.add('visible');
+                            // Enable term radios
+                            const termRadios = termsContainer.querySelectorAll('.term-radio');
+                            termRadios.forEach(radio => radio.disabled = false);
+                            
+                            // Auto-select first term if none selected
+                            const checkedRadio = termsContainer.querySelector('.term-radio:checked');
+                            if (!checkedRadio) {
+                                const firstRadio = termsContainer.querySelector('.term-radio');
+                                if (firstRadio) firstRadio.checked = true;
+                            }
+                        }
+                    } else {
+                        // Hide terms and clear selection
+                        if (hasTerms && termsContainer) {
+                            termsContainer.classList.remove('visible');
+                            const termRadios = termsContainer.querySelectorAll('.term-radio');
+                            termRadios.forEach(radio => {
+                                radio.disabled = true;
+                                radio.checked = false;
+                            });
+                        }
+                        
+                        // Remove from studentData.modules
+                        studentData.modules = studentData.modules.filter(m => m.id !== moduleId);
+                    }
+                    
+                    updateModuleState();
+                });
+            });
+
+            // Handle term radio changes
+            document.querySelectorAll('.term-radio').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    updateModuleState();
+                });
+            });
+
+            function updateModuleState() {
+                studentData.modules = [];
+                
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const moduleId = parseInt(checkbox.dataset.moduleId);
+                        const hasTerms = checkbox.dataset.hasTerms === 'true';
+                        
+                        if (hasTerms) {
+                            const selectedTerm = document.querySelector(`input[name="term-module-${moduleId}"]:checked`);
+                            if (selectedTerm) {
+                                studentData.modules.push({
+                                    id: moduleId,
+                                    term: parseInt(selectedTerm.dataset.termId)
+                                });
+                            }
+                        } else {
+                            studentData.modules.push({ id: moduleId });
+                        }
+                    }
+                });
+
+                // Validate: at least one module selected and all selected modules with terms have a term chosen
+                const isValid = studentData.modules.length > 0 && 
+                    Array.from(checkboxes).every(cb => {
+                        if (!cb.checked) return true;
+                        const hasTerms = cb.dataset.hasTerms === 'true';
+                        if (!hasTerms) return true;
+                        const moduleId = parseInt(cb.dataset.moduleId);
+                        return studentData.modules.some(m => m.id === moduleId && m.term);
+                    });
+
+                if (isValid) {
+                    payButton.disabled = false;
+                    payButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    errorElement.classList.add('hidden');
+                } else {
+                    payButton.disabled = true;
+                    payButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    errorElement.classList.remove('hidden');
+                }
+            }
+
+            updateModuleState();
+
+            payButton.onclick = function () {
+                if (studentData.modules.length > 0) {
+                    calculateFees();
+                    window.nextStep();
+                }
+            };
+        }
+
+        // Step Indicator
+        function renderStepIndicator() {
+            const indicator = document.getElementById('step-indicator');
+            const stepNames = ["Instructions", "Details", "Modules", "Summary", "Payment"];
+            let html = '';
+
+            for (let i = 1; i <= stepNames.length; i++) {
+                const isActive = i === currentStep || (i < currentStep && i <= totalSteps);
+                const isCompleted = i < currentStep;
+
+                html += `
+                    <div class="flex items-center">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg step-number-ring transition ${
+                                isCompleted
+                                    ? 'bg-green-500 border-green-500 text-white'
+                                    : isActive
+                                    ? 'bg-white border-blue text-blue'
+                                    : 'bg-white border-gray-400 text-gray-500'
+                            }">
+                                ${isCompleted ? '<i class="fas fa-check"></i>' : i}
+                            </div>
+                            <span class="text-xs mt-2 text-center w-20 ${isActive ? 'text-blue font-semibold' : 'text-gray-500'}">
+                                ${stepNames[i - 1]}
+                            </span>
+                        </div>
+                        ${i < stepNames.length ? `<div class="flex-auto h-0.5 transition mx-1 ${isCompleted ? 'bg-green-500' : 'bg-gray-300'}"></div>` : ''}
+                    </div>
+                `;
+            }
+
+            indicator.innerHTML = html;
+        }
+
+        // Google Sheets Integration
+        async function sendToGoogleSheets(data) {
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwVET7ODDnCYGrUEUzJRz-OWiC1cLiyxBmaI21nevLnKWMD51C_O61Dtev9fP-wtf5kMw/exec';
+
+            try {
+                console.log('Sending data to Google Sheets...');
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                console.log('✓ Data sent to Google Sheets & Email');
+                return true;
+            } catch (error) {
+                console.error('Error sending to Google Sheets:', error);
+                return false;
+            }
+        }
+
+        // Global Functions
+        window.nextStep = function () {
+            if (currentStep < 6) {
+                currentStep++;
+                renderApp();
+            }
+        };
+
+        window.prevStep = function () {
+            if (currentStep > 1) {
+                currentStep--;
+                renderApp();
+            }
+        };
+
+        window.handlePaymentAttempt = handlePaymentAttempt;
+        window.downloadFeeReceipt = downloadFeeReceipt;
+        window.renderApp = renderApp;
+
+        // Initialize
+        window.onload = initializeFirebase;
+    </script>
+</body>
+</html>
