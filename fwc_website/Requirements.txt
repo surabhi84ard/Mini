@@ -1,0 +1,9 @@
+# IIITB COMET Foundation Website - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+Flask==3.0.0
+Werkzeug==3.0.1
+
+# Optional but recommended for production:
+# gunicorn==21.2.0  # For production deployment
+# python-dotenv==1.0.0  # For environment variables
