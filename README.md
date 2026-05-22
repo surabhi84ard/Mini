@@ -23,10 +23,10 @@ The repository includes work across multiple domains such as:
 Programs and experiments related to low-level assembly language concepts.
 
 ## 📁 Gate
-Digital logic gate implementations and experiments.
+Gate exam papers exercise.
 
 ## 📁 Vaman_gate
-Gate-level design implementations and related hardware exercises.
+Gate-level design implementations and related hardware exercises using VAMAN board.
 
 ## 📁 avr-gcc
 Embedded C programs developed using AVR-GCC toolchain.
@@ -36,6 +36,7 @@ ESP32-based hardware interfacing and IoT-related experiments.
 
 ## 📁 imo
 Indian math olympiad papers exercise.
+
 ## 📁 latex_setup
 LaTeX setup files and documentation-related resources.
 
